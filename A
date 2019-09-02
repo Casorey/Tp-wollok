@@ -1,0 +1,46 @@
+Object barrileteCosmico{
+Var destinos = [garlicSea, silverSea, lastToninas, goodAirs]
+Method destinosImportantes() {return destinos.filter{unDestino -> unDestino.esImportante()}}
+Method aplicarDescuento(unDescuento) { destinos.map{unDestino->unDestino.descontar(unDescuento)}}
+Method empresaExtrema() { return destinos.any{unDestino->unDestino.esPeligroso()}}
+Method getDestinos(){ return destinos }
+}
+Object garlicSea{
+Var Equipaje = [“Caña de Pescar, Piloto”]
+Var Precio = 2500
+Method esImportante(){return precio > 2000}
+Method descontar(unDescuento){ precio -= unDescuento, equipaje.add(“certificado de descuento”)}
+Method esPeligroso(){return equipaje.contains(“vacuna”)}
+Method getPrecio(){ return precio}
+}
+Object silverSea{
+Var Equipaje = [“Protector Solar”,”Equipo de Buceo”]
+Var Precio = 1350
+Method esImportante(){return precio > 2000}
+Method descontar(unDescuento){ precio -= unDescuento, equipaje.add(“certificado de descuento”)}
+Method esPeligroso(){return equipaje.contains(“vacuna”)}
+Method getPrecio(){ return precio}
+}
+Object lastToninas{
+Var Equipaje = [“Vacuna Gripal”, “Vacuna B”, “Necronomicon”]
+Var Precio = 3500
+Method esImportante(){return precio > 2000}
+Method descontar(unDescuento){ precio -= unDescuento, equipaje.add(“certificado de descuento”)}
+Method esPeligroso(){return equipaje.contains(“vacuna”)}
+Method getPrecio(){ return precio}
+}
+Object goodAirs{
+Var Equipaje = [“Cerveza”, “Protector Solar”]
+Var Precio = 1500
+Method esImportante(){return precio > 2000}
+Method descontar(unDescuento){ precio -= unDescuento, equipaje.add(“certificado de descuento”)}
+Method esPeligroso(){return equipaje.contains(“vacuna”)}
+Method getPrecio(){ return precio}
+}
+Object pabloHari{
+Var usuario = “PHari”
+Var destinosConocidos = [lastToninas, goodAirs]
+Var presupuesto = 1500
+Var seguidores = []
+Method volarADestino(unDestino) { if unDestino.puedeAdquirir(presupuesto) then comprarDestino()}
+Method comprarDestino(unDestino) { destinosConocidos.add(unDestino), presupuesto -= unDestino.getPrecio()}
