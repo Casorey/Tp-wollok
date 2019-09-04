@@ -8,7 +8,7 @@ method esImportante(){
 }
 
 method agregaEquipaje(algo){
-	equipaje.add("certificado de descuento")
+	equipaje.add(algo)
 }
 method esPeligroso(){
 	return equipaje.contains("vacuna")	
@@ -18,9 +18,7 @@ method getPrecio(){
 }
 method bajarPrecio(unDescuento){ precio -= unDescuento
 }
-method obtererCupon(){
-	equipaje.add("cupon de descuento")
-}
+
 }
 object silverSea{
 var equipaje = ["Protector Solar","Equipo de Buceo"]
@@ -31,7 +29,7 @@ method esImportante(){
 }
 
 method agregaEquipaje(algo){
-	equipaje.add("certificado de descuento")
+	equipaje.add(algo)
 }
 method esPeligroso(){
 	return equipaje.contains("vacuna")	
@@ -41,9 +39,7 @@ method getPrecio(){
 }
 method bajarPrecio(unDescuento){ precio -= unDescuento
 }
-method obtererCupon(){
-	equipaje.add("cupon de descuento")
-}
+
 }
 
 object lastToninas{
@@ -55,7 +51,7 @@ method esImportante(){
 }
 
 method agregaEquipaje(algo){
-	equipaje.add("certificado de descuento")
+	equipaje.add(algo)
 }
 method esPeligroso(){
 	return equipaje.contains("vacuna")	
@@ -67,9 +63,7 @@ method bajarPrecio(unDescuento){
 	 precio -= unDescuento
 	
 }
-method obtererCupon(){
-	equipaje.add("cupon de descuento")
-}
+
 }
 
 object goodAirs{
@@ -81,7 +75,7 @@ method esImportante(){
 }
 
 method agregaEquipaje(algo){
-	equipaje.add("certificado de descuento")
+	equipaje.add(algo)
 }
 method esPeligroso(){
 	return equipaje.contains("vacuna")	
@@ -91,9 +85,7 @@ method getPrecio(){
 }
 method bajarPrecio(unDescuento){ precio -= unDescuento
 }
-method obtererCupon(){
-	equipaje.add("cupon de descuento")
-}
+
 }
 
 object barrileteCosmico{ 
@@ -104,7 +96,7 @@ method destinosImportantes() {
 }
 method aplicarDescuento(unDescuento, unDestino) {
 	unDestino.bajarPrecio(unDescuento)
-	unDestino.obtenerCupon()
+	unDestino.agregarEquipaje("cupon de descuento")
 	
 }
 method empresaExtrema() { 
@@ -124,15 +116,13 @@ var seguidores = []
 
 
 method comprarDestino(unDestino) {
+	if (unDestino.getPrecio() > self.getPresupuesto()) {
+		error.throwExceptionWithMessage("No tiene suficiente presupuesto")
+	}
 	destinosConocidos.add(unDestino)
 	presupuesto -= unDestino.getPrecio()
 }
-
-method volarADestino(unDestino) { 
-	if (unDestino.getPrecio() > presupuesto) {
-		error.throwExceptionWithMessage("No tiene suficiente presupuesto")
+method getPresupuesto(){
+	return presupuesto
 	}
-	self.comprarDestino(unDestino)
-		
-}
 }
