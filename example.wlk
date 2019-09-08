@@ -1,6 +1,6 @@
 
 object garlicSea{
-var equipaje = ["Caña de Pescar", "Piloto"]
+var equipaje = #{"Caña de Pescar", "Piloto"}
 var precio = 2500
 
 method esImportante(){
@@ -11,17 +11,24 @@ method agregaEquipaje(algo){
 	equipaje.add(algo)
 }
 method esPeligroso(){
-	return equipaje.contains("vacuna")	
+	return equipaje.any{x=>x.contains("Vacuna")}	
 }
 method getPrecio(){
 	return precio
 }
-method bajarPrecio(unDescuento){ precio -= unDescuento
+method aplicarDescuento(unDescuento){ 
+	precio = precio * (100 - unDescuento) * 0.01
+	self.agregaEquipaje("Certificado de descuento")
 }
-
+method getEquipaje(){
+	return equipaje
+}
+method millasDestino(){
+	return precio * 0.1
+}
 }
 object silverSea{
-var equipaje = ["Protector Solar","Equipo de Buceo"]
+var equipaje = #{"Protector Solar","Equipo de Buceo"}
 var precio = 1350
 
 method esImportante(){
@@ -32,18 +39,25 @@ method agregaEquipaje(algo){
 	equipaje.add(algo)
 }
 method esPeligroso(){
-	return equipaje.contains("vacuna")	
+	return equipaje.any{x=>x.contains("Vacuna")}	
 }
 method getPrecio(){
 	return precio
 }
-method bajarPrecio(unDescuento){ precio -= unDescuento
+method aplicarDescuento(unDescuento){ 
+	precio = precio * (100 - unDescuento) * 0.01
+	self.agregaEquipaje("Certificado de descuento")
 }
-
+method getEquipaje(){
+	return equipaje
+}
+method millasDestino(){
+	return precio * 0.1
+}
 }
 
 object lastToninas{
-var equipaje = ["Vacuna Gripal", "Vacuna B", "Necronomicon"]
+var equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}
 var precio = 3500
 
 method esImportante(){
@@ -53,21 +67,29 @@ method esImportante(){
 method agregaEquipaje(algo){
 	equipaje.add(algo)
 }
+
 method esPeligroso(){
-	return equipaje.contains("vacuna")	
+	return equipaje.any{x=>x.contains("Vacuna")}	
 }
 method getPrecio(){
 	return precio
 }
-method bajarPrecio(unDescuento){
-	 precio -= unDescuento
+method aplicarDescuento(unDescuento){
+	precio = precio * (100 - unDescuento) * 0.01
+	self.agregaEquipaje("Certificado de descuento")
 	
+}
+method getEquipaje(){
+	return equipaje
+}
+method millasDestino(){
+	return precio * 0.1
 }
 
 }
 
 object goodAirs{
-var equipaje = ["Cerveza", "Protector Solar"]
+var equipaje = #{"Cerveza", "Protector Solar"}
 var precio = 1500
 
 method esImportante(){
@@ -78,30 +100,41 @@ method agregaEquipaje(algo){
 	equipaje.add(algo)
 }
 method esPeligroso(){
-	return equipaje.contains("vacuna")	
+	return equipaje.any{x=>x.contains("Vacuna")}	
 }
 method getPrecio(){
 	return precio
 }
-method bajarPrecio(unDescuento){ precio -= unDescuento
+method aplicarDescuento(unDescuento){ 
+	precio = precio * (100 - unDescuento) * 0.01
+	self.agregaEquipaje("Certificado de descuento")
+}
+method getEquipaje(){
+	return equipaje
+}
+method millasDestino(){
+	return precio * 0.1
 }
 
 }
 
 object barrileteCosmico{ 
-var destinos = [garlicSea, silverSea, lastToninas, goodAirs]
+var destinos = #{garlicSea, silverSea, lastToninas, goodAirs}
 
 method destinosImportantes() {
 	return destinos.filter{unDestino=> unDestino.esImportante()}
 }
 method aplicarDescuento(unDescuento, unDestino) {
-	unDestino.bajarPrecio(unDescuento)
-	unDestino.agregarEquipaje("cupon de descuento")
+	unDestino.aplicarDescuento(unDescuento)
 	
 }
 method empresaExtrema() { 
 	return destinos.any{unDestino=>unDestino.esPeligroso()}
 }
+method destinosPeligrosos(){
+	return destinos.filter{unDestino=>unDestino.esPeligroso()}
+}
+
 method getDestinos(){
 	return destinos
 }
@@ -110,19 +143,26 @@ method getDestinos(){
 
 object pabloHari{
 var usuario = "PHari"
-var destinosConocidos = [lastToninas, goodAirs]
+var destinosVisitados = [lastToninas, goodAirs]
 var presupuesto = 1500
-var seguidores = []
+var seguidores = #{}
 
 
 method comprarDestino(unDestino) {
-	if (unDestino.getPrecio() > self.getPresupuesto()) {
-		error.throwExceptionWithMessage("No tiene suficiente presupuesto")
+	if (unDestino.getPrecio() > self.getPresupuesto()) {//no me quiere tomar la exception, no estoy seguro si la escribi bien
+	//	error.throwExceptionWithMessage("No tiene suficiente presupuesto")
 	}
-	destinosConocidos.add(unDestino)
+	destinosVisitados.add(unDestino)
 	presupuesto -= unDestino.getPrecio()
 }
 method getPresupuesto(){
 	return presupuesto
 	}
+
+method millasAcumuladas(){
+	return destinosVisitados.sum{unDestino=>unDestino.millasDestino()}
+}
+method viajoA(unDestino){
+	return destinosVisitados.contains(unDestino)
+}
 }
