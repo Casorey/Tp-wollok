@@ -149,8 +149,8 @@ var seguidores = #{}
 
 
 method comprarDestino(unDestino) {
-	if (unDestino.getPrecio() > self.getPresupuesto()) {//no me quiere tomar la exception, no estoy seguro si la escribi bien
-	//	error.throwExceptionWithMessage("No tiene suficiente presupuesto")
+	if (unDestino.getPrecio() > self.getPresupuesto()) {
+		error.throwWithMessage("No tiene suficiente presupuesto")
 	}
 	destinosVisitados.add(unDestino)
 	presupuesto -= unDestino.getPrecio()
@@ -164,5 +164,9 @@ method millasAcumuladas(){
 }
 method viajoA(unDestino){
 	return destinosVisitados.contains(unDestino)
+}
+method seguirUsuario(unUsuario){
+	seguidores.add(unUsuario)
+	unUsuario.seguirUsuario(self)
 }
 }
