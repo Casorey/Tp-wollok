@@ -16,6 +16,11 @@ method esPeligroso(){
 method getPrecio(){
 	return precio
 }
+
+method metodo() {
+	return "hola"
+}
+
 method aplicarDescuento(unDescuento){ 
 	precio = precio * (100 - unDescuento) * 0.01
 	self.agregaEquipaje("Certificado de descuento")
