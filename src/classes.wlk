@@ -56,11 +56,12 @@ var localidadOrigen
 var destinosVisitados
 
 
-method comprarDestino(unDestino, unMedio) {
+method puedeComprarDestino(unDestino, unMedio) {
 	if (unDestino.getPrecio() + unMedio.valorEntreLocalidades(localidadOrigen, unDestino)  > self.getPresupuesto()) {
 		self.error("No tiene suficiente presupuesto")
 	}
-	var unViaje = new Viaje(medioUsado = unMedio, origen = localidadOrigen, destino = unDestino)
+	}
+method adquirirViaje (unViaje){
 	viajes.add(unViaje)
 	presupuesto -= unViaje.costo()
 	localidadOrigen = unDestino

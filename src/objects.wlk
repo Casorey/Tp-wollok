@@ -37,7 +37,11 @@ method getDestinos(){
 	return destinos
 }
 method armarViaje(usuario, destino){
-	usuario.comprarDestino(destino, mediosDeTransporte.anyOne())
+	var unMedio = mediosDeTransporte.anyOne()
+	if usuario.puedeComprarDestino(destino, unMedio) {
+		var unViaje = new Viaje(medioUsado = unMedio, origen = localidadOrigen, destino = unDestino)
+		usuario.adquirViaje(unViaje)
+	}
 }
 }
 
