@@ -1,31 +1,34 @@
 import classes.*
 
-object garlicSea inherits Localidad(equipaje = #{"Caña de Pescar", "Piloto"}, precio = 2500, ubicacion = 50) {
+// Localidades
 
-}
-object silverSea inherits Localidad(equipaje = #{"Protector Solar","Equipo de Buceo"}, precio = 1350, ubicacion = 100) {
-	
-}
+object garlicSea inherits Localidad(equipaje = #{"Caña de Pescar", "Piloto"}, precio = 2500, ubicacion = 50) {}
 
-object lastToninas inherits Localidad(equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}, precio = 3500, ubicacion = 200){
+object silverSea inherits Localidad(equipaje = #{"Protector Solar","Equipo de Buceo"}, precio = 1350, ubicacion = 100) {}
 
-}
+object lastToninas inherits Localidad(equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}, precio = 3500, ubicacion = 200){}
 
-object goodAirs inherits Localidad(equipaje = #{"Cerveza", "Protector Solar"}, precio = 1500, ubicacion = 300){
-	
-}
+object goodAirs inherits Localidad(equipaje = #{"Cerveza", "Protector Solar"}, precio = 1500, ubicacion = 300){}
 
-object pabloHari inherits Usuario(usuario = "PHari", presupuesto =  1500, destinosVisitados = #{lastToninas, goodAirs}){
+// Usuarios
 
-}
+object pabloHari inherits Usuario(usuario = "PHari", presupuesto =  1500, destinosVisitados = #{lastToninas, goodAirs}){}
 
-object juan inherits Usuario(usuario = "Juan", presupuesto = 500, destinosVisitados = #{garlicSea}){
-	
-}
+object juan inherits Usuario(usuario = "Juan", presupuesto = 500, destinosVisitados = #{garlicSea}){}
+
+// Medios de transporte
+
+object combi inherits MedioDeTransporte(precioXKM = 50){}
+
+object micro inherits MedioDeTransporte(precioXKM = 200){}
+
+object avion inherits MedioDeTransporte(precioXKM = 500){}
+
+// Barrilete Cosmico
 
 object barrileteCosmico{ 
 var property destinos = #{garlicSea, silverSea, lastToninas, goodAirs}
-var property mediosDeTransporte = #{}
+var property mediosDeTransporte = #{avion,combi}
 
 
 method destinosImportantes() {
