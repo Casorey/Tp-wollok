@@ -14,7 +14,7 @@ object goodAirs inherits Localidad(equipaje = #{"Cerveza", "Protector Solar"}, p
 
 object pabloHari inherits Usuario(usuario = "PHari",viajes = #{}, presupuesto =  1500, destinosVisitados = #{lastToninas, goodAirs}, localidadOrigen = silverSea){}
 
-object juan inherits Usuario(usuario = "Juan", presupuesto = 5000, destinosVisitados = #{}){}
+object juan inherits Usuario(usuario = "Juan",viajes = #{}, presupuesto = 500000, destinosVisitados = #{},localidadOrigen = silverSea){}
 
 // Medios de transporte
 
@@ -31,7 +31,7 @@ object avion inherits MedioDeTransporte(precioXKM = 500){}
 // Barrilete Cosmico
 
 object barrileteCosmico{ 
-var property destinos = #{garlicSea, silverSea, lastToninas, goodAirs}
+var property destinos = #{garlicSea,silverSea,lastToninas,goodAirs}
 var property mediosDeTransporte = #{avion,combi,micro}
 
 
@@ -57,6 +57,6 @@ method armarViaje(usuario, unDestino){
 		var unViaje = new Viaje(medioUsado = unMedio, origen = usuario.localidadOrigen(), destino = unDestino)
 		usuario.adquirirViaje(unViaje)
 	}
-	else{ self.error("El usuario no puede comprar el viaje")}
+	else{self.error("El usuario no puede comprar el viaje")}
 }
 }

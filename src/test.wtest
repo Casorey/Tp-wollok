@@ -1,0 +1,12 @@
+import objects.*
+import classes.*
+
+test "los destinos importantes de barilete cosmico son garlic sea y last toninas" {
+
+	assert.equals(#{garlicSea, lastToninas} , barrileteCosmico.destinosImportantes())
+
+}
+test "despues de aplicar un descuento de 25%, las toninas tiene un precio de 2625" {
+	lastToninas.aplicarDescuento(25)
+	assert.equals(2625 , lastToninas.precio())
+}
