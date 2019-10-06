@@ -36,15 +36,15 @@ method destinosPeligrosos(){
 method getDestinos(){
 	return destinos
 }
-method armarViaje(usuario, destino){
+
+method armarViaje(usuario, unDestino){
 	var unMedio = mediosDeTransporte.anyOne()
-	if (usuario.puedeComprarDestino(destino, unMedio)) {
-		var unViaje = new Viaje(medioUsado = unMedio, origen = localidadOrigen, destino = unDestino)
-		usuario.adquirViaje(unViaje)
+	if (usuario.puedeComprarDestino(unDestino,unMedio)){
+		var unViaje = new Viaje(medioUsado = unMedio, origen = usuario.getLocalidadOrigen(), destino = unDestino)
+		usuario.adquirirViaje(unViaje)
 	}
 }
 }
-
 
 object pabloHari inherits Usuario(usuario = "PHari", presupuesto =  1500, seguidores = #{}, destinosVisitados = #{lastToninas, goodAirs}){
 

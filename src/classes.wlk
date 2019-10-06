@@ -1,10 +1,5 @@
 class MediosDeTransporte{
-	var velocidad
 	var precioXKM
-	
-	method llegaADestino(unDestino){
-		return unDestino.getUbicacion() / velocidad
-	}
 	
 	method valorEntreLocalidades(unaLocalidad, otraLocalidad){
 		return unaLocalidad.distanciaA(otraLocalidad) * precioXKM
@@ -57,10 +52,9 @@ var destinosVisitados
 
 
 method puedeComprarDestino(unDestino, unMedio) {
-	if (unDestino.getPrecio() + unMedio.valorEntreLocalidades(localidadOrigen, unDestino)  > self.getPresupuesto()) {
-		self.error("No tiene suficiente presupuesto")
+	return unDestino.getPrecio() + unMedio.valorEntreLocalidades(localidadOrigen, unDestino) > self.getPresupuesto()
 	}
-	}
+	
 method adquirirViaje (unViaje){
 	viajes.add(unViaje)
 	presupuesto -= unViaje.costo()
@@ -71,6 +65,10 @@ method adquirirViaje (unViaje){
 method getPresupuesto(){
 	return presupuesto
 	}
+
+method getLocalidadOrigen(){
+	return localidadOrigen
+}
 
 method millasAcumuladas(){
 	return viajes.sum{unViaje=>unViaje.millasSumadas()}
