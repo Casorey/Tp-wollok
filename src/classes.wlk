@@ -4,6 +4,9 @@ class MedioDeTransporte{
 	method valorEntreLocalidades(unaLocalidad, otraLocalidad){
 		return unaLocalidad.distanciaA(otraLocalidad) * precioXKM
 	}
+	method estimarCosto(origen, unDestino){
+		return valorEntreLocalidades(origen, destino) + unDestino.precio()
+	}
 	
 }
 class Localidad{
@@ -45,7 +48,7 @@ var property kilometrosAcumulados
 
 
 method puedeComprarDestino(unDestino, unMedio) {
-	return unDestino.precio() + unMedio.valorEntreLocalidades(localidadOrigen, unDestino) < self.presupuesto()
+	return unMedio.estimarCosto(localidadOrigen, unDestino) < self.presupuesto()
 	}
 	
 method adquirirViaje (unViaje){
@@ -76,7 +79,7 @@ class Viaje{
 	var property destino
 	
 	method costo(){
-		return medioUsado.valorEntreLocalidades(origen, destino) + destino.precio()
+		return unMedio.estimarCosto(origen, destino)
 	}
 	 
 	method kilometrosSumados(){
