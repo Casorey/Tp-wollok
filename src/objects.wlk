@@ -2,9 +2,9 @@ import classes.*
 
 // Localidades
 
-object garlicSea inherits Localidad(equipaje = #{"Caña de Pescar", "Piloto"}, precio = 2500, ubicacion = 50) {}
+object garlicSea inherits Localidad(equipaje = #{"Caña de Pescar", "Piloto"}, precio = 2500, ubicacion = 50){}
 
-object silverSea inherits Localidad(equipaje = #{"Protector Solar","Equipo de Buceo"}, precio = 1350, ubicacion = 100) {}
+object silverSea inherits Localidad(equipaje = #{"Protector Solar","Equipo de Buceo"}, precio = 1350, ubicacion = 100){}
 
 object lastToninas inherits Localidad(equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}, precio = 3500, ubicacion = 200){}
 
@@ -12,9 +12,9 @@ object goodAirs inherits Localidad(equipaje = #{"Cerveza", "Protector Solar"}, p
 
 // Usuarios
 
-object pabloHari inherits Usuario(usuario = "PHari", presupuesto =  1500, destinosVisitados = #{lastToninas, goodAirs}){}
+object pabloHari inherits Usuario(usuario = "PHari",viajes = #{}, presupuesto =  1500, destinosVisitados = #{lastToninas, goodAirs}, localidadOrigen = silverSea){}
 
-object juan inherits Usuario(usuario = "Juan", presupuesto = 500, destinosVisitados = #{garlicSea}){}
+object juan inherits Usuario(usuario = "Juan", presupuesto = 5000, destinosVisitados = #{}){}
 
 // Medios de transporte
 
@@ -24,11 +24,15 @@ object micro inherits MedioDeTransporte(precioXKM = 200){}
 
 object avion inherits MedioDeTransporte(precioXKM = 500){}
 
+// Viajes
+
+/*ACA IRIAN LOS VIAJES*/
+
 // Barrilete Cosmico
 
 object barrileteCosmico{ 
 var property destinos = #{garlicSea, silverSea, lastToninas, goodAirs}
-var property mediosDeTransporte = #{avion,combi}
+var property mediosDeTransporte = #{avion,combi,micro}
 
 
 method destinosImportantes() {
@@ -53,5 +57,6 @@ method armarViaje(usuario, unDestino){
 		var unViaje = new Viaje(medioUsado = unMedio, origen = usuario.localidadOrigen(), destino = unDestino)
 		usuario.adquirirViaje(unViaje)
 	}
+	else{ self.error("El usuario no puede comprar el viaje")}
 }
 }

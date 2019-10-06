@@ -46,7 +46,7 @@ var property destinosVisitados
 
 
 method puedeComprarDestino(unDestino, unMedio) {
-	return unDestino.precio() + unMedio.valorEntreLocalidades(localidadOrigen, unDestino) > self.presupuesto()
+	return unDestino.precio() + unMedio.valorEntreLocalidades(localidadOrigen, unDestino) < self.presupuesto()
 	}
 	
 method adquirirViaje (unViaje){
