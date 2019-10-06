@@ -37,12 +37,10 @@ method distanciaA(otraLocalidad){
 	
 }
 class Usuario{
-var property usuario
 var property viajes
 var property presupuesto
 var property seguidores
 var property localidadOrigen
-var property destinosVisitados
 var property kilometrosAcumulados
 
 
