@@ -64,10 +64,10 @@ method viajoA(unDestino){
 	return destinosVisitados.contains(unDestino)
 }
 
-/*method seguirUsuario(unUsuario){
+method seguirUsuario(unUsuario){
 	seguidores.add(unUsuario)
 	unUsuario.seguirUsuario(self)
-}*/
+}
 }
 
 class Viaje{
