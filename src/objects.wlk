@@ -38,7 +38,7 @@ method getDestinos(){
 }
 method armarViaje(usuario, destino){
 	var unMedio = mediosDeTransporte.anyOne()
-	if usuario.puedeComprarDestino(destino, unMedio) {
+	if (usuario.puedeComprarDestino(destino, unMedio)) {
 		var unViaje = new Viaje(medioUsado = unMedio, origen = localidadOrigen, destino = unDestino)
 		usuario.adquirViaje(unViaje)
 	}

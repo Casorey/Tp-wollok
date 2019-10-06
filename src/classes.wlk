@@ -51,7 +51,7 @@ class Usuario{
 var usuario
 var viajes
 var presupuesto
-var seguidores 
+var seguidores = #{}
 var localidadOrigen
 var destinosVisitados
 
@@ -64,8 +64,8 @@ method puedeComprarDestino(unDestino, unMedio) {
 method adquirirViaje (unViaje){
 	viajes.add(unViaje)
 	presupuesto -= unViaje.costo()
-	localidadOrigen = unDestino
-	destinosVisitados.add(unDestino)
+	localidadOrigen = unViaje.getDestino()
+	destinosVisitados.add(unViaje.getDestino())
 
 }
 method getPresupuesto(){
@@ -93,5 +93,8 @@ class Viaje{
 		} 
 	method millasSumadas(){
 		return origen.distanciaA(destino)
+	}
+	method getDestino(){
+			return destino
 	}
 }

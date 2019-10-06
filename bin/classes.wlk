@@ -51,20 +51,21 @@ class Usuario{
 var usuario
 var viajes
 var presupuesto
-var seguidores 
+var seguidores = #{}
 var localidadOrigen
 var destinosVisitados
 
 
-method comprarDestino(unDestino, unMedio) {
+method puedeComprarDestino(unDestino, unMedio) {
 	if (unDestino.getPrecio() + unMedio.valorEntreLocalidades(localidadOrigen, unDestino)  > self.getPresupuesto()) {
 		self.error("No tiene suficiente presupuesto")
 	}
-	var unViaje = new Viaje(medioUsado = unMedio, origen = localidadOrigen, destino = unDestino)
+	}
+method adquirirViaje (unViaje){
 	viajes.add(unViaje)
 	presupuesto -= unViaje.costo()
-	localidadOrigen = unDestino
-	destinosVisitados.add(unDestino)
+	localidadOrigen = unViaje.getDestino()
+	destinosVisitados.add(unViaje.getDestino())
 
 }
 method getPresupuesto(){
@@ -92,5 +93,8 @@ class Viaje{
 		} 
 	method millasSumadas(){
 		return origen.distanciaA(destino)
+	}
+	method getDestino(){
+			return destino
 	}
 }
