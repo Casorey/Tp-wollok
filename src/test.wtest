@@ -37,7 +37,6 @@ test " se aplica un descuento de 15% a todos los destinos y su valor es, GarlicÂ
 
 }
 test "lastToninas es el unico destino peligroso" {
-	
 	assert.equals(#{lastToninas} , barrileteCosmico.destinosPeligrosos())	
 }
 test " barrileteCosmico es una empresa extrema"{
@@ -45,4 +44,12 @@ test " barrileteCosmico es una empresa extrema"{
 }
 test "los destinos de barrilete cosmico son garlicSea, silverSea, lastToninas, goodAirs."{
 	assert.equals(#{garlicSea, silverSea, lastToninas, goodAirs}, barrileteCosmico.destinos())
+}
+test "pablo hari no tiene kilometros acumulados inicialmente"{
+	assert.equals(0, pabloHari.kilometrosAcumulados())
+}
+test "Barrilete Cosmico le arma un viaje a pablo hari y tiene kilometros acumulados"{
+	barrileteCosmico.armarViaje(pabloHari,silverSea)
+	
+	assert.that(pabloHari.kilometrosAcumulados()>0)
 }

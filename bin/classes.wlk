@@ -43,6 +43,7 @@ var property presupuesto
 var property seguidores
 var property localidadOrigen
 var property destinosVisitados
+var property kilometrosAcumulados
 
 
 method puedeComprarDestino(unDestino, unMedio) {
@@ -54,9 +55,10 @@ method adquirirViaje (unViaje){
 	presupuesto -= unViaje.costo()
 	localidadOrigen = unViaje.destino()
 	destinosVisitados.add(unViaje.destino())
+	kilometrosAcumulados += unViaje.kilometrosSumados()
 }
 
-method kilometrosAcumulados(){
+method kilometrosTotales(){
 	return viajes.sum{unViaje=>unViaje.kilometrosSumados()}
 }
 
