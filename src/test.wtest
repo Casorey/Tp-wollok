@@ -69,3 +69,4 @@ test "pablo agrega a juan y se siguen mutuamente"{
 
 	assert.that(pHari.sigueA(juan))
 	assert.that(juan.sigueA(pHari))
+}
