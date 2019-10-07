@@ -67,8 +67,10 @@ method kilometrosTotales(){
 }*/
 
 method seguirUsuario(unUsuario){
+	if (not(seguidores.contains(unUsuario))){
 	seguidores.add(unUsuario)
 	unUsuario.seguirUsuario(self)
+}
 }
 method sigueA(unUsuario){
 	return seguidores.contains(unUsuario)
