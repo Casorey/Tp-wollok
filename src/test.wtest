@@ -70,3 +70,12 @@ test "pablo agrega a juan y se siguen mutuamente"{
 	assert.that(pHari.sigueA(juan))
 	assert.that(juan.sigueA(pHari))
 }
+test "Si barrilete cosmico le arma un viaje a pablo hari a last toninas con escala en silver sea,
+ y el esta en garlic sea, recorre 150km y su nueva localidad de origen es garlic sea"
+{
+	pHari.localidadOrigen(garlicSea)
+	barrileteCosmico.armarViaje(pHari,silverSea)
+	barrileteCosmico.armarViaje(pHari,lastToninas)
+	
+	assert.equals(150, pHari.kilometrosAcumulados())	
+}
