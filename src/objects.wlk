@@ -12,9 +12,9 @@ object goodAirs inherits Localidad(equipaje = #{"Cerveza", "Protector Solar"}, p
 
 // Usuarios
 
-object pHari inherits Usuario(viajes = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea){}
+object pHari inherits Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea){}
 
-object juan inherits Usuario(viajes = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea){}
+object juan inherits Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea){}
 
 // Medios de transporte
 
