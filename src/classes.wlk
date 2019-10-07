@@ -54,7 +54,6 @@ method adquirirViaje (unViaje){
 	viajes.add(unViaje)
 	presupuesto -= unViaje.costo()
 	localidadOrigen = unViaje.destino()
-	//destinosVisitados.add(unViaje.destino())
 	kilometrosAcumulados += unViaje.kilometrosSumados()
 }
 
@@ -64,7 +63,7 @@ method kilometrosTotales(){
 
 method viajoA(unViaje){
 	return viajes.contains(unViaje)
-
+}
 
 method seguirUsuario(unUsuario){
 	if (not(seguidores.contains(unUsuario))){
