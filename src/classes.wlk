@@ -71,6 +71,8 @@ method seguirUsuario(unUsuario){
 	seguidores.add(unUsuario)
 	unUsuario.seguirUsuario(self)
 }
+method sigueA(unUsuario){
+	seguidores.contains(unUsuario)
 }
 
 class Viaje{
