@@ -49,20 +49,20 @@ test "pablo hari no tiene kilometros acumulados inicialmente"{
 	assert.equals(0, pHari.kilometrosAcumulados())
 }
 test "Barrilete Cosmico le arma un viaje a pablo hari y tiene kilometros acumulados"{
-	barrileteCosmico.armarViaje(pHari,silverSea)
+	barrileteCosmico.armarViaje(pHari,lastToninas)
 	
-	assert.that(pabloHari.kilometrosAcumulados()>0)
+	assert.that(pHari.kilometrosAcumulados()>0)
 }
 test "Barrilete Cosmico le arma un viaje a pablo hari a garlicSea y su localidad origen cambia a galicSea"{
-	barrileteCosmico.armarViaje(pHari,galicSea)
+	barrileteCosmico.armarViaje(pHari, garlicSea)
 	
-	assert.equals(pHari.localidadOrigen(),galicSea)
+	assert.equals(pHari.localidadOrigen(), garlicSea)
 }
 test "Barrilete Cosmico le arma un viaje a pablo hari y su presupuesto cambia"{
 	var presupuestoAntesDeViaje = pHari.presupuesto()
 	barrileteCosmico.armarViaje(pHari,silverSea)
 	
-	assert.notequals(pHari.presupuesto(), presupuestoAntesDeViaje)
+	assert.notEquals(pHari.presupuesto(), presupuestoAntesDeViaje)
 }
 test "pablo agrega a juan y se siguen mutuamente"{
 	pHari.seguirUsuario(juan)

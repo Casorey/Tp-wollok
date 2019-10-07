@@ -4,8 +4,11 @@ class MedioDeTransporte{
 	method valorEntreLocalidades(unaLocalidad, otraLocalidad){
 		return unaLocalidad.distanciaA(otraLocalidad) * precioXKM
 	}
-	
+	method estimarCosto(origen, unDestino){
+		return self.valorEntreLocalidades(origen, unDestino) + unDestino.precio()
+	}	
 }
+
 class Localidad{
 	var property equipaje
 	var property precio
@@ -37,24 +40,21 @@ method distanciaA(otraLocalidad){
 	
 }
 class Usuario{
-var property usuario
 var property viajes
 var property presupuesto
 var property seguidores
 var property localidadOrigen
-var property destinosVisitados
 var property kilometrosAcumulados
 
-
 method puedeComprarDestino(unDestino, unMedio) {
-	return unDestino.precio() + unMedio.valorEntreLocalidades(localidadOrigen, unDestino) < self.presupuesto()
+	return unMedio.estimarCosto(localidadOrigen, unDestino) < self.presupuesto()
 	}
 	
 method adquirirViaje (unViaje){
 	viajes.add(unViaje)
 	presupuesto -= unViaje.costo()
 	localidadOrigen = unViaje.destino()
-	destinosVisitados.add(unViaje.destino())
+	//destinosVisitados.add(unViaje.destino())
 	kilometrosAcumulados += unViaje.kilometrosSumados()
 }
 
@@ -62,14 +62,17 @@ method kilometrosTotales(){
 	return viajes.sum{unViaje=>unViaje.kilometrosSumados()}
 }
 
-method viajoA(unDestino){
+/*method viajoA(unDestino){
 	return destinosVisitados.contains(unDestino)
-}
+}*/
 
-/*method seguirUsuario(unUsuario){
+method seguirUsuario(unUsuario){
 	seguidores.add(unUsuario)
 	unUsuario.seguirUsuario(self)
-}*/
+}
+method sigueA(unUsuario){
+	return seguidores.contains(unUsuario)
+}
 }
 
 class Viaje{
@@ -78,7 +81,7 @@ class Viaje{
 	var property destino
 	
 	method costo(){
-		return medioUsado.valorEntreLocalidades(origen, destino) + destino.precio()
+		return medioUsado.estimarCosto(origen, destino)
 	}
 	 
 	method kilometrosSumados(){

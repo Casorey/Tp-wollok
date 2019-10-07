@@ -12,9 +12,9 @@ object goodAirs inherits Localidad(equipaje = #{"Cerveza", "Protector Solar"}, p
 
 // Usuarios
 
-object pHari inherits Usuario(viajes = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, destinosVisitados = #{lastToninas, goodAirs}, localidadOrigen = silverSea){}
+object pHari inherits Usuario(viajes = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea){}
 
-object juan inherits Usuario(viajes = #{}, kilometrosAcumulados = 0,presupuesto = 500000, destinosVisitados = #{},localidadOrigen = silverSea){}
+object juan inherits Usuario(viajes = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea){}
 
 // Medios de transporte
 
@@ -31,7 +31,7 @@ object avion inherits MedioDeTransporte(precioXKM = 500){}
 // Barrilete Cosmico
 
 object barrileteCosmico{ 
-var property destinos = #{silverSea,lastToninas,goodAirs,garlicSea}
+var property destinos = #{garlicSea,silverSea,lastToninas,goodAirs}
 var property mediosDeTransporte = #{avion,combi,micro}
 
 
