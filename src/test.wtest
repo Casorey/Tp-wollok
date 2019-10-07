@@ -79,3 +79,13 @@ test "Si barrilete cosmico le arma un viaje a pablo hari a last toninas con esca
 	
 	assert.equals(150, pHari.kilometrosAcumulados())	
 }
+test "Si se viaja desde last toninas a garlic sea se recorren 150 km"
+{
+	assert.equals(150, lastToninas.distanciaA(garlicSea))
+}
+test "Viajar en avion desde silver sea hacia last toninas cuesta 53500 pesos"
+{
+	var viaje = new Viaje(medioUsado = avion, origen = silverSea, destino = lastToninas)
+	
+	assert.equals(53500, viaje.costo())
+}
