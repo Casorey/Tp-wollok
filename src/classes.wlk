@@ -62,9 +62,9 @@ method kilometrosTotales(){
 	return viajes.sum{unViaje=>unViaje.kilometrosSumados()}
 }
 
-/*method viajoA(unDestino){
-	return destinosVisitados.contains(unDestino)
-}*/
+method viajoA(unViaje){
+	return viajes.contains(unViaje)
+
 
 method seguirUsuario(unUsuario){
 	if (not(seguidores.contains(unUsuario))){
