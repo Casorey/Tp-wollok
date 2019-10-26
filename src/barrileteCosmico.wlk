@@ -10,14 +10,6 @@ object pHari inherits Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulado
 
 object juan inherits Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea){}
 
-// Medios de transporte
-
-object combi inherits MedioDeTransporte(precioXKM = 50){}
-
-object micro inherits MedioDeTransporte(precioXKM = 200){}
-
-object avion inherits MedioDeTransporte(precioXKM = 500){}
-
 // Viajes
 
 /*ACA IRIAN LOS VIAJES*/
@@ -25,8 +17,8 @@ object avion inherits MedioDeTransporte(precioXKM = 500){}
 // Barrilete Cosmico
 
 object barrileteCosmico{ 
-var property destinos = #{garlicSea,silverSea,lastToninas,goodAirs}
-var property mediosDeTransporte = #{avion,combi,micro}
+var property destinos = #{playa,ciudadHistorica,montania}
+var property mediosDeTransporte = #{avion,tren,micro}
 
 
 method destinosImportantes() {

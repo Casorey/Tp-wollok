@@ -1,44 +1,46 @@
 class MedioDeTransporte{
-	
+	var property velocidad
 	
 	method valorEntreLocalidades(unaLocalidad, otraLocalidad){
-		return (unaLocalidad.distanciaA(otraLocalidad)) * (self.precioXKM(unaLocalidad, otraLocalidad))
+		return (unaLocalidad.distanciaA(otraLocalidad)) * (self.precioXKM())
 	}
-	method estimarCosto(origen, unDestino){
-		return self.valorEntreLocalidades(origen, unDestino) + unDestino.precio()
-	}	
-	method precioXKM(origen, unDestino){
+	
+	method estimarCosto(unOrigen, unDestino){
+		return self.valorEntreLocalidades(unOrigen, unDestino) + unDestino.precio()
+	}
+	
+	method precioXKM(){
 		return 0
 	}
+	
 }
 
-object avion inherits MedioDeTransporte{
+object avion inherits MedioDeTransporte(velocidad = 100){
 	var turbina
 	
-	override method precioXKM(origen, unDestino){
+	override method precioXKM(){
 		return turbina.sum{unaTurbina=>unaTurbina.nivelImpulso()}
 	}
 	
 }
 
-object micro inherits MedioDeTransporte{
-	override method precioXKM(origen, unDestino){
+object micro inherits MedioDeTransporte(velocidad = 20){
+	override method precioXKM(){
 		return 5000
 	}
 	
 }
 
-object tren inherits MedioDeTransporte{
-	override method precioXKM(origen, unDestino){
-		return (origen.distanciaA(unDestino) *0.621371) //esto nos da en millas
-		 * 2300}
-	}
-	
+object tren inherits MedioDeTransporte(velocidad = 50){
+	override method precioXKM(){
+		return 0.621371*2300
+	}	
+}
 
-
-object barco inherits MedioDeTransporte{
+object barco inherits MedioDeTransporte(velocidad = 40){
 	var probabilidadChoque
-	override method precioXKM(origen, unDestino){
+	
+	override method precioXKM(){
 		return 1000 * probabilidadChoque
 	}
 }

@@ -1,28 +1,14 @@
-import classes.*
+import viaje.*
+import localidad.*
+import mediosDeTransporte.*
+import usuarios.*
 
-// Localidades
-
-object garlicSea inherits Localidad(equipaje = #{"Caña de Pescar", "Piloto"}, precio = 2500, ubicacion = 50){}
-
-object silverSea inherits Localidad(equipaje = #{"Protector Solar","Equipo de Buceo"}, precio = 1350, ubicacion = 100){}
-
-object lastToninas inherits Localidad(equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}, precio = 3500, ubicacion = 200){}
-
-object goodAirs inherits Localidad(equipaje = #{"Cerveza", "Protector Solar"}, precio = 1500, ubicacion = 300){}
 
 // Usuarios
 
 object pHari inherits Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea){}
 
 object juan inherits Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea){}
-
-// Medios de transporte
-
-object combi inherits MedioDeTransporte(precioXKM = 50){}
-
-object micro inherits MedioDeTransporte(precioXKM = 200){}
-
-object avion inherits MedioDeTransporte(precioXKM = 500){}
 
 // Viajes
 
@@ -31,8 +17,8 @@ object avion inherits MedioDeTransporte(precioXKM = 500){}
 // Barrilete Cosmico
 
 object barrileteCosmico{ 
-var property destinos = #{garlicSea,silverSea,lastToninas,goodAirs}
-var property mediosDeTransporte = #{avion,combi,micro}
+var property destinos = #{playa,ciudadHistorica,montania}
+var property mediosDeTransporte = #{avion,tren,micro}
 
 
 method destinosImportantes() {

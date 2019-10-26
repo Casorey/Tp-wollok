@@ -4,6 +4,7 @@ var property presupuesto
 var property seguidores
 var property localidadOrigen
 var property kilometrosAcumulados
+var property medioDeTransporte
 
 method puedeComprarDestino(unDestino, unMedio) {
 	return unMedio.estimarCosto(localidadOrigen, unDestino) < self.presupuesto()
@@ -33,4 +34,19 @@ method seguirUsuario(unUsuario){
 method sigueA(unUsuario){
 	return seguidores.contains(unUsuario)
 }
+}
+
+object usuarioEmpresarial inherits Usuario{
+	
+	method elegirMedio(mediosDeTransporte){
+		medioDeTransporte = mediosDeTransporte.max{unMedio => unMedio.velocidad()}
+	}
+}
+
+object usuarioEstudiantil inherits Usuario{
+		
+	method elegirMedio(mediosDeTransporte){
+		mediosDeTransporte.sortBy{unMedio, otroMedio => unMedio.velocidad()>otroMedio.velocidad()}
+		medioDeTransporte = mediosDeTransporte.find{unMedio => unMedio.precioXKM()<=presupuesto}
+	}
 }

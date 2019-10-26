@@ -1,5 +1,9 @@
-import objects.*
-import classes.*
+import barrileteCosmico.*
+import viaje.*
+import localidad.*
+import mediosDeTransporte.*
+import usuarios.*
+
 
 test "los destinos importantes de barilete cosmico son garlic sea y last toninas" {
 
