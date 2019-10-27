@@ -1,8 +1,7 @@
 import viaje.*
-import localidad.*
+import localidades.*
 import mediosDeTransporte.*
 import usuarios.*
-import localidad.*
 
 object barrileteCosmico{ 
 var property destinos

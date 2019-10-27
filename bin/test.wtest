@@ -1,6 +1,6 @@
 import barrileteCosmico.*
 import viaje.*
-import localidad.*
+import localidades.*
 import mediosDeTransporte.*
 import usuarios.*
 

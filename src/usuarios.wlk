@@ -1,5 +1,5 @@
 import mediosDeTransporte.*
-import localidad.*
+import localidades.*
 
 class Usuario{
 var property viajes
