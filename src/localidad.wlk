@@ -20,53 +20,44 @@ method aplicarDescuento(unDescuento){
 	self.agregaEquipaje("Certificado de descuento")
 }
 method verificaEquipaje(unObjeto){
-	return equipaje.contains(unObjeto)}
+	return equipaje.contains(unObjeto)
+}
 method kilometrosDestino(){
 	return precio * 0.1
 }
-
 method distanciaA(otraLocalidad){
 	return (ubicacion - otraLocalidad.ubicacion()).abs()
-	}
-	
-	}
+}	
+}
 
-object playa{
-	method esPeligroso(){
+class Playa{
+	method esPeligroso(unaLocalidad){
 		return false
 	}
 	method esDestacado(){
 		return false //como no me dicen nada de las playas asumo false, pero bueno
 	}
 }
-object montania{
+
+class Montania {
 	var altura
 	
 	method esPeligroso(unaLocalidad){
-		return unaLocalidad.verificaEquipaje("Vacuna") && altura < 5000
+		return not(unaLocalidad.verificaEquipaje("Vacuna")) && altura > 5000
 		}
 		
 	method esDestacado(){
 		return true
 		}
 	}
-object ciudadHistorica{
+	
+class CiudadHistorica {
 	var cantidadMuseos
 	method esPeligroso(unaLocalidad){
-		return unaLocalidad.verificaEquipaje("Seguro asistencai al viajero")
+		return not(unaLocalidad.verificaEquipaje("Seguro asistencia al viajero"))
 		}
 	
 	method esDestacado(){
 		return cantidadMuseos > 3 
 	}
 }
-
-
-object garlicSea inherits Localidad(equipaje = #{"Caña de Pescar", "Piloto"}, precio = 2500, ubicacion = 50){}
-
-object silverSea inherits Localidad(equipaje = #{"Protector Solar","Equipo de Buceo"}, precio = 1350, ubicacion = 100){}
-
-object lastToninas inherits Localidad(equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}, precio = 3500, ubicacion = 200){}
-
-object goodAirs inherits Localidad(equipaje = #{"Cerveza", "Protector Solar"}, precio = 1500, ubicacion = 300){}
-	

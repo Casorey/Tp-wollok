@@ -2,23 +2,11 @@ import viaje.*
 import localidad.*
 import mediosDeTransporte.*
 import usuarios.*
-
-
-// Usuarios
-
-object pHari inherits Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea){}
-
-object juan inherits Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea){}
-
-// Viajes
-
-/*ACA IRIAN LOS VIAJES*/
-
-// Barrilete Cosmico
+import localidad.*
 
 object barrileteCosmico{ 
-var property destinos = #{playa,ciudadHistorica,montania}
-var property mediosDeTransporte = #{avion,tren,micro}
+var property destinos
+var property mediosDeTransporte
 
 
 method destinosImportantes() {

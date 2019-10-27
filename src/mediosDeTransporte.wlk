@@ -15,37 +15,34 @@ class MedioDeTransporte{
 	
 }
 
-object avion inherits MedioDeTransporte(velocidad = 100){
-	var turbina
+class Avion inherits MedioDeTransporte{
+	var turbinas
 	
 	override method precioXKM(){
-		return turbina.sum{unaTurbina=>unaTurbina.nivelImpulso()}
+		return turbinas.sum{unaTurbina=>unaTurbina.nivelImpulso()}
 	}
-	
 }
 
-object micro inherits MedioDeTransporte(velocidad = 20){
+class Micro inherits MedioDeTransporte{
 	override method precioXKM(){
 		return 5000
 	}
-	
 }
 
-object tren inherits MedioDeTransporte(velocidad = 50){
+class Tren inherits MedioDeTransporte{
 	override method precioXKM(){
 		return 0.621371*2300
 	}	
 }
 
-object barco inherits MedioDeTransporte(velocidad = 40){
-	var probabilidadChoque
+class Barco inherits MedioDeTransporte{
+	var property probabilidadChoque
 	
 	override method precioXKM(){
 		return 1000 * probabilidadChoque
 	}
 }
 
-
-object turbina{
+class Turbina{
 	var property nivelImpulso
 }

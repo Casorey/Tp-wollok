@@ -5,9 +5,38 @@ import mediosDeTransporte.*
 import usuarios.*
 
 
-test "los destinos importantes de barilete cosmico son garlic sea y last toninas" {
+describe "Tests" {
 
-	assert.equals(#{garlicSea, lastToninas} , barrileteCosmico.destinosImportantes())
+var turbina = new Turbina(nivelImpulso = 2)
+var turbinaDoble = new Turbina(nivelImpulso = 4)
+
+var avion = new Avion(turbinas = [turbina, turbinaDoble],velocidad = 100)
+var barco = new Barco(probabilidadChoque = 0.8, velocidad = 70)
+var tren = new Tren()
+var micro = new Micro()
+
+var playa = new Playa()
+var montania = new Montania(altura = 1000)
+var montaniaAlta = new Montania(altura = 6000)
+var ciudadHistorica = new CiudadHistorica(cantidadMuseos = 5)
+
+var garlicSea = new Localidad(equipaje = #{"CaÃ±a de Pescar", "Piloto"}, precio = 2500, ubicacion = 50,tipoLocalidad = playa)
+var silverSea = new Localidad(equipaje = #{"Protector Solar","Equipo de Buceo","Seguro asistencia al viajero"}, precio = 1350, ubicacion = 100,tipoLocalidad = ciudadHistorica)
+var lastToninas = new Localidad(equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}, precio = 3500, ubicacion = 200,tipoLocalidad = montania)
+var goodAirs = new Localidad(equipaje = #{"Cerveza", "Protector Solar"}, precio = 1500, ubicacion = 300, tipoLocalidad = montaniaAlta)
+
+var pHari = new Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea, perfil = empresarial, mediosDeTransporte = [avion,tren,micro,barco])
+var juan = new Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea, perfil = estudiantil, mediosDeTransporte = [avion,tren,micro,barco])
+
+
+fixture {
+	barrileteCosmico.destinos(#{garlicSea,silverSea,lastToninas,goodAirs})
+	barrileteCosmico.mediosDeTransporte(#{avion,barco,tren,micro})
+}
+
+test "El destino importante de barilete cosmico es last toninas" {
+
+	assert.equals(#{lastToninas} , barrileteCosmico.destinosImportantes())
 
 }
 test "despues de aplicar un descuento de 25%, las toninas tiene un precio de 2625" {
@@ -40,8 +69,8 @@ test " se aplica un descuento de 15% a todos los destinos y su valor es, GarlicÂ
 	assert.that((goodAirs.equipaje()).contains("Certificado de descuento"))
 
 }
-test "lastToninas es el unico destino peligroso" {
-	assert.equals(#{lastToninas} , barrileteCosmico.destinosPeligrosos())	
+test "goodAirs es el unico destino peligroso" {
+	assert.equals(#{goodAirs} , barrileteCosmico.destinosPeligrosos())	
 }
 test " barrileteCosmico es una empresa extrema"{
 	assert.that(barrileteCosmico.empresaExtrema())
@@ -92,4 +121,5 @@ test "Viajar en avion desde silver sea hacia last toninas cuesta 53500 pesos"
 	var viaje = new Viaje(medioUsado = avion, origen = silverSea, destino = lastToninas)
 	
 	assert.equals(53500, viaje.costo())
+}
 }
