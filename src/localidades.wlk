@@ -48,8 +48,7 @@ class Montania {
 	
 	method esPeligroso(unaLocalidad){
 		return not(unaLocalidad.verificaEquipaje("Vacuna")) && altura > 5000
-		}
-		
+		}	
 	method esDestacado(){
 		return true
 		}
@@ -57,10 +56,10 @@ class Montania {
 	
 class CiudadHistorica {
 	var cantidadMuseos
+	
 	method esPeligroso(unaLocalidad){
 		return not(unaLocalidad.verificaEquipaje("Seguro asistencia al viajero"))
 		}
-	
 	method esDestacado(){
 		return cantidadMuseos > 3 
 	}
