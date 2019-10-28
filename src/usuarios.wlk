@@ -7,8 +7,6 @@ var property presupuesto
 var property seguidores
 var property localidadOrigen
 var property kilometrosAcumulados
-var perfil
-var mediosDeTransporte
 
 method puedeComprarDestino(unDestino, unMedio) {
 	return unMedio.estimarCosto(localidadOrigen, unDestino) < self.presupuesto()
@@ -38,29 +36,29 @@ method seguirUsuario(unUsuario){
 method sigueA(unUsuario){
 	return seguidores.contains(unUsuario)
 }
-method elegirMedio(){
-	return perfil.elegirMedio(mediosDeTransporte)
+method elegirMedio(medios){
+	return 0
 }
 }
 
-object empresarial{
+class UsuarioEmpresarial inherits Usuario{
 	
-	method elegirMedio(mediosDeTransporte){
-		return mediosDeTransporte.max{unMedio => unMedio.velocidad()}
+	override method elegirMedio(mediosDisponibles){
+		return mediosDisponibles.max{unMedio => unMedio.velocidad()}
 	}
 }
 
-object estudiantil inherits Usuario{
-			
-	method elegirMedio(mediosdeTransporte){
-		mediosDeTransporte.sortBy{unMedio, otroMedio => unMedio.velocidad()>otroMedio.velocidad()}
-		return mediosDeTransporte.find{unMedio => unMedio.precioXKM()<=presupuesto}
+class UsuarioEstudiantil inherits Usuario{
+	
+	override method elegirMedio(mediosDisponibles){
+		mediosDisponibles.sortBy{unMedio, otroMedio => unMedio.velocidad()>otroMedio.velocidad()}
+		return mediosDisponibles.find{unMedio => unMedio.precioXKM()<=presupuesto}
 	}
 }
 
-object grupoFamiliar{
+class GrupoFamiliar inherits Usuario{
 	
-	method elegirMedio(mediosDeTransporte){
-		return mediosDeTransporte.anyOne()
+	override method elegirMedio(mediosDisponibles){
+		return mediosDisponibles.anyOne()
 	}
 }

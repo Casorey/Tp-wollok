@@ -12,7 +12,6 @@ class MedioDeTransporte{
 	method precioXKM(){
 		return 0
 	}
-	
 }
 
 class Avion inherits MedioDeTransporte{

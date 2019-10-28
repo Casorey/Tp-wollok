@@ -7,13 +7,14 @@ import usuarios.*
 
 describe "Tests" {
 
-var turbina = new Turbina(nivelImpulso = 2)
-var turbinaDoble = new Turbina(nivelImpulso = 4)
+var turbina = new Turbina(nivelImpulso = 500)
+var turbinaDoble = new Turbina(nivelImpulso = 1000)
 
 var avion = new Avion(turbinas = [turbina, turbinaDoble],velocidad = 100)
 var barco = new Barco(probabilidadChoque = 0.8, velocidad = 70)
-var tren = new Tren()
-var micro = new Micro()
+var tren = new Tren(velocidad = 60)
+var micro = new Micro(velocidad = 30)
+var medios = [avion,tren,micro,barco]
 
 var playa = new Playa()
 var montania = new Montania(altura = 1000)
@@ -25,19 +26,19 @@ var silverSea = new Localidad(equipaje = #{"Protector Solar","Equipo de Buceo","
 var lastToninas = new Localidad(equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}, precio = 3500, ubicacion = 200,tipoLocalidad = montania)
 var goodAirs = new Localidad(equipaje = #{"Cerveza", "Protector Solar"}, precio = 1500, ubicacion = 300, tipoLocalidad = montaniaAlta)
 
-var pHari = new Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea, perfil = empresarial, mediosDeTransporte = [avion,tren,micro,barco])
-var juan = new Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea, perfil = estudiantil, mediosDeTransporte = [avion,tren,micro,barco])
-
+var pHari = new UsuarioEmpresarial(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea)
+var juan = new UsuarioEmpresarial(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea)
+var ariel = new UsuarioEstudiantil(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto = 1000, localidadOrigen = garlicSea)
+var familiaPerez = new GrupoFamiliar(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto = 1600, localidadOrigen = lastToninas)
 
 fixture {
 	barrileteCosmico.destinos(#{garlicSea,silverSea,lastToninas,goodAirs})
 	barrileteCosmico.mediosDeTransporte(#{avion,barco,tren,micro})
 }
 
-test "El destino importante de barilete cosmico es last toninas" {
-
+test "El destino importante de barilete cosmico es last toninas" 
+{
 	assert.equals(#{lastToninas} , barrileteCosmico.destinosImportantes())
-
 }
 test "despues de aplicar un descuento de 25%, las toninas tiene un precio de 2625" {
 	lastToninas.aplicarDescuento(25)
@@ -49,7 +50,6 @@ test "despues de aplicar un descuento de 25%, las toninas tiene un certificado d
 }
 test "silver sea NO es un destino peligroso" {
 	assert.notThat(silverSea.esPeligroso())
-
 }
 test " se aplica un descuento de 15% a todos los destinos y su valor es, GarlicÂ´s sea: $2125, Silver's Sea: $1147.5,
  Last Toninas: $2975, Good Airs: $1275 y todos deben poseer el certificado de descuento.
@@ -69,37 +69,41 @@ test " se aplica un descuento de 15% a todos los destinos y su valor es, GarlicÂ
 	assert.that((goodAirs.equipaje()).contains("Certificado de descuento"))
 
 }
-test "goodAirs es el unico destino peligroso" {
+test "goodAirs es el unico destino peligroso" 
+{
 	assert.equals(#{goodAirs} , barrileteCosmico.destinosPeligrosos())	
 }
-test " barrileteCosmico es una empresa extrema"{
+test " barrileteCosmico es una empresa extrema"
+{
 	assert.that(barrileteCosmico.empresaExtrema())
 }
-test "los destinos de barrilete cosmico son garlicSea, silverSea, lastToninas, goodAirs."{
+test "los destinos de barrilete cosmico son garlicSea, silverSea, lastToninas, goodAirs."
+{
 	assert.equals(#{garlicSea, silverSea, lastToninas, goodAirs}, barrileteCosmico.destinos())
 }
-test "pablo hari no tiene kilometros acumulados inicialmente"{
+test "pablo hari no tiene kilometros acumulados inicialmente"
+{
 	assert.equals(0, pHari.kilometrosAcumulados())
 }
-test "Barrilete Cosmico le arma un viaje a pablo hari y tiene kilometros acumulados"{
-	barrileteCosmico.armarViaje(pHari,lastToninas)
-	
+test "Barrilete Cosmico le arma un viaje a pablo hari y tiene kilometros acumulados"
+{
+	barrileteCosmico.armarViaje(pHari,lastToninas)	
 	assert.that(pHari.kilometrosAcumulados()>0)
 }
-test "Barrilete Cosmico le arma un viaje a pablo hari a garlicSea y su localidad origen cambia a galicSea"{
+test "Barrilete Cosmico le arma un viaje a pablo hari a garlicSea y su localidad origen cambia a galicSea"
+{
 	barrileteCosmico.armarViaje(pHari, garlicSea)
-	
 	assert.equals(pHari.localidadOrigen(), garlicSea)
 }
-test "Barrilete Cosmico le arma un viaje a pablo hari y su presupuesto cambia"{
+test "Barrilete Cosmico le arma un viaje a pablo hari y su presupuesto cambia"
+{
 	var presupuestoAntesDeViaje = pHari.presupuesto()
-	barrileteCosmico.armarViaje(pHari,silverSea)
-	
+	barrileteCosmico.armarViaje(pHari,silverSea)	
 	assert.notEquals(pHari.presupuesto(), presupuestoAntesDeViaje)
 }
-test "pablo agrega a juan y se siguen mutuamente"{
+test "pablo agrega a juan y se siguen mutuamente"
+{
 	pHari.seguirUsuario(juan)
-
 	assert.that(pHari.sigueA(juan))
 	assert.that(juan.sigueA(pHari))
 }
@@ -108,18 +112,25 @@ test "Si barrilete cosmico le arma un viaje a pablo hari a last toninas con esca
 {
 	pHari.localidadOrigen(garlicSea)
 	barrileteCosmico.armarViaje(pHari,silverSea)
-	barrileteCosmico.armarViaje(pHari,lastToninas)
-	
+	barrileteCosmico.armarViaje(pHari,lastToninas)	
 	assert.equals(150, pHari.kilometrosAcumulados())	
 }
 test "Si se viaja desde last toninas a garlic sea se recorren 150 km"
 {
 	assert.equals(150, lastToninas.distanciaA(garlicSea))
 }
-test "Viajar en avion desde silver sea hacia last toninas cuesta 53500 pesos"
+test "Viajar en avion desde silver sea hacia last toninas cuesta 153500 pesos"
 {
 	var viaje = new Viaje(medioUsado = avion, origen = silverSea, destino = lastToninas)
 	
-	assert.equals(53500, viaje.costo())
+	assert.equals(153500, viaje.costo())
+}
+test "Ariel elige el barco como medio de transporte"
+{
+	assert.equals(barco,ariel.elegirMedio(medios))
+}
+test "silverSea NO es una ciudad destacada"
+{
+	assert.notThat(silverSea.esImportante())
 }
 }

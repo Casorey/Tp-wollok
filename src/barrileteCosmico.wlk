@@ -7,7 +7,6 @@ object barrileteCosmico{
 var property destinos
 var property mediosDeTransporte
 
-
 method destinosImportantes() {
 	return destinos.filter{unDestino=> unDestino.esImportante()}
 }
