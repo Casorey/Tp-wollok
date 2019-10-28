@@ -14,7 +14,7 @@ var avion = new Avion(turbinas = [turbina, turbinaDoble],velocidad = 100)
 var barco = new Barco(probabilidadChoque = 0.8, velocidad = 70)
 var tren = new Tren(velocidad = 60)
 var micro = new Micro(velocidad = 30)
-var medios = [avion,tren,micro,barco]
+var mediosDeTransporte = [avion,tren,micro,barco]
 
 var playa = new Playa()
 var montania = new Montania(altura = 1000)
@@ -25,11 +25,12 @@ var garlicSea = new Localidad(equipaje = #{"Caña de Pescar", "Piloto"}, precio 
 var silverSea = new Localidad(equipaje = #{"Protector Solar","Equipo de Buceo","Seguro asistencia al viajero"}, precio = 1350, ubicacion = 100,tipoLocalidad = ciudadHistorica)
 var lastToninas = new Localidad(equipaje = #{"Vacuna Gripal", "Vacuna B", "Necronomicon"}, precio = 3500, ubicacion = 200,tipoLocalidad = montania)
 var goodAirs = new Localidad(equipaje = #{"Cerveza", "Protector Solar"}, precio = 1500, ubicacion = 300, tipoLocalidad = montaniaAlta)
+var laPlata = new Localidad(equipaje = #{"Protector Solar","Equipo de Buceo","Seguro asistencia al viajero"}, precio = 6000, ubicacion = 100,tipoLocalidad = ciudadHistorica)
 
-var pHari = new UsuarioEmpresarial(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea)
-var juan = new UsuarioEmpresarial(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea)
-var ariel = new UsuarioEstudiantil(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto = 1000, localidadOrigen = garlicSea)
-var familiaPerez = new GrupoFamiliar(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto = 1600, localidadOrigen = lastToninas)
+var pHari = new Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto =  1000000, localidadOrigen = silverSea, perfil = empresarial)
+var juan = new Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0,presupuesto = 500000,localidadOrigen = silverSea, perfil = estudiantil)
+var ariel = new Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto = 1000, localidadOrigen = garlicSea, perfil = estudiantil)
+var familiaPerez = new Usuario(viajes = #{},seguidores = #{}, kilometrosAcumulados = 0, presupuesto = 1600, localidadOrigen = lastToninas, perfil = grupoFamiliar)
 
 fixture {
 	barrileteCosmico.destinos(#{garlicSea,silverSea,lastToninas,goodAirs})
@@ -127,10 +128,33 @@ test "Viajar en avion desde silver sea hacia last toninas cuesta 153500 pesos"
 }
 test "Ariel elige el barco como medio de transporte"
 {
-	assert.equals(barco,ariel.elegirMedio(medios))
+	assert.equals(barco,ariel.elegirMedio(mediosDeTransporte))
 }
-test "silverSea NO es una ciudad destacada"
+test "pHari elige el avion como medio de transporte"
+{
+	assert.equals(avion,pHari.elegirMedio(mediosDeTransporte))
+}
+test "silverSea NO es una ciudad importante"
 {
 	assert.notThat(silverSea.esImportante())
+}
+test "laPlata es una ciudad importante"
+{
+	assert.that(laPlata.esImportante())
+}
+test "El precioXKM de un avion con 2 turbinas simples y 2 turbinas dobles es 3000"
+{
+	var avionDePrueba = new Avion(turbinas = [turbina,turbina,turbinaDoble,turbinaDoble], velocidad = 100)
+	assert.equals(3000,avionDePrueba.precioXKM())
+}
+test "Si Ariel cambia el perfil de estudiantil, a empresarial, pasa a elegir el avion como medio de transporte"
+{
+	ariel.perfil(empresarial)
+	assert.equals(avion,ariel.elegirMedio(mediosDeTransporte))
+}
+test "Si en un viaje a laPlata, no se lleva el seguro de asistencia al viajero, el destino es peligroso"
+{
+	laPlata.quitarEquipaje("Seguro asistencia al viajero")
+	assert.that(laPlata.esPeligroso())
 }
 }

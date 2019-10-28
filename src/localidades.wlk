@@ -11,6 +11,10 @@ method esImportante(){
 method agregaEquipaje(algo){
 	equipaje.add(algo)
 }
+
+method quitarEquipaje(algo){
+	equipaje.remove(algo)
+}
 method esPeligroso(){
 	return tipoLocalidad.esPeligroso(self)	
 }
