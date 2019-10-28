@@ -5,7 +5,8 @@ class Localidad{
 	var tipoLocalidad
 	
 method esImportante(){
-	return precio > 2000 && tipoLocalidad.esDestacado()
+	return precio > 2000 && 
+	tipoLocalidad.esDestacado()
 }
 
 method agregaEquipaje(algo){

@@ -9,9 +9,7 @@ class MedioDeTransporte{
 		return self.valorEntreLocalidades(unOrigen, unDestino) + unDestino.precio()
 	}
 	
-	method precioXKM(){
-		return 0
-	}
+	method precioXKM()
 }
 
 class Avion inherits MedioDeTransporte{
@@ -29,8 +27,9 @@ class Micro inherits MedioDeTransporte{
 }
 
 class Tren inherits MedioDeTransporte{
+	const equivalenciaKms = 0.621371
 	override method precioXKM(){
-		return 0.621371*2300
+		return equivalenciaKms*2300
 	}	
 }
 
